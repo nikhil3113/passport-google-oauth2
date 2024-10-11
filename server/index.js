@@ -5,6 +5,7 @@ const jwt = require("jsonwebtoken");
 const authenticateUser = require("./middleware/auth");
 const session = require("express-session");
 const cors = require("cors");
+require("dotenv").config();
 
 require("./middleware/passport");
 
