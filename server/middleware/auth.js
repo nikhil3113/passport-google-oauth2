@@ -1,16 +1,15 @@
-const jwt = require("jsonwebtoken");
-
-function authenticateUser(req,res,next){
-    const authHeader = req.headers['authorization'];
-    if (!authHeader) return res.status(401).send('Authorization header missing');
-    const token = authHeader.split(' ')[1];
-    try {
-        const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        req.user = decoded;
-        next();
-    } catch (error) {
-        return res.status(403).send('UnAuthorized User');
+const authenticateUser = (req, res, next) => {
+    console.log("Session details:", req.session); // Debug session details
+    console.log("Is authenticated:", req.isAuthenticated()); // Debug the authentication check
+  
+    if (req.isAuthenticated()) {
+      console.log("Authenticated user:", req.user);
+      return next();
     }
-}
+  
+    return res.status(401).json({
+      message: "Unauthorized",
+    });
+  };
 
 module.exports = authenticateUser;
