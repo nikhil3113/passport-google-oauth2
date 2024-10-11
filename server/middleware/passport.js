@@ -9,7 +9,8 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: "/auth/google/callback",
+      //! change url based 
+      callbackURL: "https://passport-google-oauth2.vercel.app/auth/google/callback",
     },
     async (accessToken, refreshToken, profile, done) => {
       try {
